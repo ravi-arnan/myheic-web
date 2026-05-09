@@ -1,5 +1,6 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
 import Converter from '../Converter'
@@ -12,25 +13,20 @@ const Aurora = dynamic(() => import('../reactbits/Aurora'), {
   loading: () => null
 })
 
+// Soft pastel lavender/lilac for light-mode surface so the Aurora reads as
+// atmospheric tint, not as a saturated overlay. Deep brand purples for dark
+// mode where the underlying surface absorbs them.
+const AURORA_LIGHT = ['#e9d5ff', '#fbcfe8', '#c4b5fd']
+const AURORA_DARK = ['#7132f5', '#a78bfa', '#5b1ecf']
+
 export default function Hero(): React.JSX.Element {
   const t = useTranslations('hero')
+  const { resolvedTheme } = useTheme()
+  const colors = resolvedTheme === 'dark' ? AURORA_DARK : AURORA_LIGHT
   return (
     <section className="relative isolate overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[420px] opacity-30 dark:opacity-75"
-        style={{
-          maskImage:
-            'radial-gradient(ellipse 60% 80% at 50% 30%, black 40%, transparent 80%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 60% 80% at 50% 30%, black 40%, transparent 80%)'
-        }}
-      >
-        <Aurora
-          colorStops={['#7132f5', '#a78bfa', '#5b1ecf']}
-          amplitude={0.8}
-          blend={0.55}
-          speed={0.4}
-        />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[640px] opacity-70 dark:opacity-90">
+        <Aurora colorStops={colors} amplitude={1.0} blend={0.55} speed={0.5} />
       </div>
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
         <Magnet magnetStrength={6} padding={60}>
