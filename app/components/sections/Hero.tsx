@@ -28,7 +28,7 @@ export default function Hero(): React.JSX.Element {
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[640px] opacity-70 dark:opacity-90">
         <Aurora colorStops={colors} amplitude={1.0} blend={0.55} speed={0.5} />
       </div>
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-5xl flex-col items-center px-6 pt-12 pb-32 text-center sm:pt-16 sm:pb-44">
         <Magnet magnetStrength={6} padding={60}>
           <span className="mb-4 inline-flex rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-1 text-xs font-medium text-[color:var(--color-ink-muted)] shadow-[var(--shadow-whisper)]">
             {t('eyebrow')}
