@@ -104,8 +104,8 @@ void main() {
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
 
   // Premultiplied output: keep color saturated, let alpha carry the
-  // intensity falloff. Multiplying RGB by `intensity` here would darken
-  // the color before compositing, leaving dirty grey halos on light
+  // intensity falloff. Multiplying RGB by intensity here darkens the
+  // color before compositing and leaves dirty grey halos on light
   // surfaces. Pure-alpha falloff blends cleanly on any background.
   fragColor = vec4(rampColor * auroraAlpha, auroraAlpha);
 }
