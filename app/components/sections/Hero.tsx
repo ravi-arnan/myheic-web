@@ -15,16 +15,16 @@ const Aurora = dynamic(() => import('../reactbits/Aurora'), {
 export default function Hero(): React.JSX.Element {
   const t = useTranslations('hero')
   return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[480px] opacity-40 dark:opacity-60">
+    <section className="relative isolate overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[640px] opacity-70 dark:opacity-90">
         <Aurora
-          colorStops={['#7132f5', '#a78bfa', '#7132f5']}
-          amplitude={0.7}
-          blend={0.6}
-          speed={0.4}
+          colorStops={['#7132f5', '#a78bfa', '#5b1ecf']}
+          amplitude={1.0}
+          blend={0.55}
+          speed={0.5}
         />
       </div>
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
         <Magnet magnetStrength={6} padding={60}>
           <span className="mb-4 inline-flex rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-1 text-xs font-medium text-[color:var(--color-ink-muted)] shadow-[var(--shadow-whisper)]">
             {t('eyebrow')}
