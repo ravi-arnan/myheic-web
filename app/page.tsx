@@ -47,8 +47,6 @@ function Header(): React.JSX.Element {
           </a>
         </nav>
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <LangToggle />
           <a
             href={DONATE_URL}
             target="_blank"
@@ -57,6 +55,8 @@ function Header(): React.JSX.Element {
           >
             {t('donate')}
           </a>
+          <ThemeToggle />
+          <LangToggle />
         </div>
       </div>
     </header>
