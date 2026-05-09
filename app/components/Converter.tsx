@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import { attachExifToJpeg, buildExifBytesFromHeic } from '../lib/exif'
 
 type FileStatus = 'pending' | 'converting' | 'done' | 'error'
 
@@ -160,16 +161,22 @@ export default function Converter(): React.JSX.Element {
     for (const item of pending) {
       updateItem(item.id, { status: 'converting', error: undefined })
       try {
-        const blob = await heicTo({
-          blob: item.file,
-          type: 'image/jpeg',
-          quality: quality / 100
-        })
-        const url = URL.createObjectURL(blob)
+        const [jpegBlob, exifBytes] = await Promise.all([
+          heicTo({
+            blob: item.file,
+            type: 'image/jpeg',
+            quality: quality / 100
+          }),
+          buildExifBytesFromHeic(item.file)
+        ])
+        const finalBlob = exifBytes
+          ? await attachExifToJpeg(jpegBlob, exifBytes)
+          : jpegBlob
+        const url = URL.createObjectURL(finalBlob)
         updateItem(item.id, {
           status: 'done',
           outputUrl: url,
-          outputBytes: blob.size
+          outputBytes: finalBlob.size
         })
       } catch (err) {
         updateItem(item.id, {
