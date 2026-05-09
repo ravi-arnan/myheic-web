@@ -83,8 +83,11 @@
   "desktopCta": {
     "badge": "Untuk batch besar",
     "title": "Convert ratusan file? Pakai versi desktop.",
-    "description": "MyHeic untuk Windows — drag folder, convert sekaligus, save langsung ke folder pilihan kamu. Cocok untuk backup foto dari HP.",
-    "downloadCta": "Download untuk Windows",
+    "description": "Drag folder, convert sekaligus, save langsung ke folder pilihan kamu. Cocok untuk backup foto dari HP.",
+    "downloadWindows": "Download untuk Windows",
+    "downloadWindowsHint": ".exe · Windows 10/11",
+    "downloadLinux": "Download untuk Linux",
+    "downloadLinuxHint": ".AppImage · Ubuntu, Fedora, dll.",
     "githubCta": "Lihat source code di GitHub →"
   },
   "faq": {

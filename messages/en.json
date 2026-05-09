@@ -83,8 +83,11 @@
   "desktopCta": {
     "badge": "For large batches",
     "title": "Converting hundreds of files? Use the desktop version.",
-    "description": "MyHeic for Windows — drag a folder, batch convert, save straight to the folder of your choice. Ideal for backing up photos from your phone.",
-    "downloadCta": "Download for Windows",
+    "description": "Drag a folder, batch convert, save straight to the folder of your choice. Ideal for backing up photos from your phone.",
+    "downloadWindows": "Download for Windows",
+    "downloadWindowsHint": ".exe · Windows 10/11",
+    "downloadLinux": "Download for Linux",
+    "downloadLinuxHint": ".AppImage · Ubuntu, Fedora, etc.",
     "githubCta": "View source on GitHub →"
   },
   "faq": {
