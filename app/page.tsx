@@ -62,7 +62,7 @@ function Hero(): React.JSX.Element {
       />
       <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-10 pb-16 text-center sm:pt-14 sm:pb-20">
         <span className="mb-3 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
-          Gratis · Offline · Tanpa batas
+          Gratis · Tanpa login · Offline
         </span>
         <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
           Foto HEIC dari HP, jadi JPG{' '}
@@ -130,6 +130,11 @@ function DesktopCta(): React.JSX.Element {
 function Features(): React.JSX.Element {
   const items = [
     {
+      title: 'Tanpa login',
+      description:
+        'Tidak perlu daftar akun, kasih email, atau verifikasi apa-apa. Buka, drop file, selesai.'
+    },
+    {
       title: 'Gratis selamanya',
       description:
         'Tidak ada batas konversi, watermark, atau biaya tahunan. Semua fitur tersedia tanpa bayar.'
@@ -137,12 +142,12 @@ function Features(): React.JSX.Element {
     {
       title: '100% Offline',
       description:
-        'Foto kamu tidak pernah meninggalkan komputer. Konversi terjadi di laptop sendiri.'
+        'Foto tidak pernah di-upload ke server. Konversi 100% di browser/komputer kamu.'
     },
     {
-      title: 'Cepat & batch',
+      title: 'Metadata terjaga',
       description:
-        'Drop banyak file sekaligus, convert sekali klik. Versi desktop bahkan support folder.'
+        'EXIF asli (datetime, GPS, kamera, ISO, exposure) ikut ke JPG hasil. Foto tetap rapi di galeri.'
     },
     {
       title: 'Dirancang untuk awam',
@@ -161,7 +166,7 @@ function Features(): React.JSX.Element {
             Dibikin karena converter online berbayar Rp400rb/tahun itu bikin frustrasi.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((item) => (
             <div
               key={item.title}
