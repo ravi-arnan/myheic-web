@@ -101,12 +101,12 @@ function DesktopCta(): React.JSX.Element {
                 folder pilihan kamu. Cocok untuk backup foto dari HP.
               </p>
             </div>
-            <div className="flex flex-col gap-2 sm:items-end">
+            <div className="flex shrink-0 flex-col gap-2 sm:items-end">
               <a
                 href={DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
               >
                 <DownloadIcon />
                 Download untuk Windows
@@ -142,7 +142,7 @@ function Features(): React.JSX.Element {
     {
       title: 'Cepat & batch',
       description:
-        'Convert ratusan file sekaligus. Drag & drop folder, klik convert, selesai.'
+        'Drop banyak file sekaligus, convert sekali klik. Versi desktop bahkan support folder.'
     },
     {
       title: 'Dirancang untuk awam',
