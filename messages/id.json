@@ -54,6 +54,52 @@
       "error": "Error"
     }
   },
+  "stats": {
+    "eyebrow": "Bukan janji marketing",
+    "items": [
+      { "value": "0", "suffix": "", "label": "Foto di-upload ke server" },
+      { "value": "100", "suffix": "%", "label": "Konversi gratis selamanya" },
+      { "value": "1", "suffix": " klik", "label": "Untuk convert satu file" }
+    ]
+  },
+  "phoneMarquee": {
+    "label": "Bekerja untuk foto HEIC dari",
+    "brands": [
+      "iPhone",
+      "Samsung Galaxy",
+      "Google Pixel",
+      "Huawei Mate",
+      "Xiaomi 14",
+      "Oppo Find",
+      "Vivo X",
+      "Realme GT"
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "Cara kerjanya",
+    "title": "Tiga langkah, tanpa kurva belajar",
+    "subtitle": "Tidak ada akun, tidak ada upload, tidak ada batas. Drop file dan selesai.",
+    "steps": [
+      {
+        "title": "Drop file HEIC",
+        "description": "Drag dari File Explorer / Files, atau klik untuk pilih. Multiple file sekaligus didukung."
+      },
+      {
+        "title": "Convert di browser kamu",
+        "description": "WebAssembly libheif decode HEIC → encode JPG. Foto tidak pernah keluar dari komputer."
+      },
+      {
+        "title": "Download JPG hasil",
+        "description": "EXIF asli (datetime, GPS, kamera) ikut terjaga. Langsung bisa dibuka di galeri / dishare."
+      }
+    ]
+  },
+  "whyThisExists": {
+    "eyebrow": "Cerita di balik MyHeic",
+    "title": "Dibuat karena ayah saya kesulitan buka foto sendiri",
+    "body": "HP Samsung ayah saya penuh, jadi otomatis simpan foto sebagai HEIC supaya hemat memori. Tapi pas dipindah ke laptop, foto-foto itu tidak bisa kebuka. Converter online berbayar minta langganan ratusan ribu per tahun setelah 50 file gratis. Buat orang biasa yang cuma mau lihat foto cucu, itu absurd. Jadi saya bikin MyHeic — gratis selamanya, jalan di browser, tidak perlu install atau login. Kalau membantu, traktir kopi-nya opsional.",
+    "attribution": "— Ravi, Indonesia"
+  },
   "features": {
     "title": "Yang bikin MyHeic beda",
     "subtitle": "Dibikin karena converter online berbayar Rp400rb/tahun itu bikin frustrasi.",

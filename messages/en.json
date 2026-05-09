@@ -54,6 +54,52 @@
       "error": "Error"
     }
   },
+  "stats": {
+    "eyebrow": "Not a marketing promise",
+    "items": [
+      { "value": "0", "suffix": "", "label": "Photos uploaded to a server" },
+      { "value": "100", "suffix": "%", "label": "Free, forever" },
+      { "value": "1", "suffix": " click", "label": "To convert a single file" }
+    ]
+  },
+  "phoneMarquee": {
+    "label": "Works for HEIC photos from",
+    "brands": [
+      "iPhone",
+      "Samsung Galaxy",
+      "Google Pixel",
+      "Huawei Mate",
+      "Xiaomi 14",
+      "Oppo Find",
+      "Vivo X",
+      "Realme GT"
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Three steps, no learning curve",
+    "subtitle": "No account, no upload, no limit. Drop a file and you're done.",
+    "steps": [
+      {
+        "title": "Drop your HEIC file",
+        "description": "Drag from File Explorer / Files, or click to pick. Multiple files at once is supported."
+      },
+      {
+        "title": "Convert in your browser",
+        "description": "WebAssembly libheif decodes HEIC, then encodes JPG. Your photos never leave your computer."
+      },
+      {
+        "title": "Download the JPG",
+        "description": "Original EXIF (datetime, GPS, camera) is preserved. Open in any gallery or share immediately."
+      }
+    ]
+  },
+  "whyThisExists": {
+    "eyebrow": "The story behind MyHeic",
+    "title": "Built because my dad couldn't open his own photos",
+    "body": "My dad's Samsung phone was full, so it started saving photos as HEIC to save space. But when he moved them to his laptop, they wouldn't open. Paid online converters wanted hundreds of dollars per year after 50 free conversions. For someone who just wants to see photos of their grandkids, that's absurd. So I built MyHeic — free forever, runs in the browser, no install, no login. If it helps you, the coffee is optional.",
+    "attribution": "— Ravi, Indonesia"
+  },
   "features": {
     "title": "What makes MyHeic different",
     "subtitle": "Built because paid online converters at $25/year are frustrating.",

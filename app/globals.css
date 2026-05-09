@@ -34,10 +34,10 @@
   --color-ink-value: #101114;
   --color-ink-muted-value: #686b82;
   --color-ink-soft-value: #9497a9;
-  --color-line-value: #dedee5;
-  --color-line-soft-value: rgba(104, 107, 130, 0.16);
-  --color-surface-value: #ffffff;
-  --color-surface-soft-value: #f7f7fa;
+  --color-line-value: #e6e6eb;
+  --color-line-soft-value: rgba(104, 107, 130, 0.14);
+  --color-surface-value: #fbfbfd;
+  --color-surface-soft-value: #f5f5f7;
   --color-success-bg-value: rgba(20, 158, 97, 0.16);
   --color-success-ink-value: #026b3f;
   --color-warning-bg-value: rgba(245, 158, 11, 0.16);
@@ -83,4 +83,19 @@ body {
   transition:
     background-color 200ms ease,
     color 200ms ease;
+}
+
+@keyframes myheic-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[myheic-marquee_38s_linear_infinite\] {
+    animation: none;
+  }
 }
