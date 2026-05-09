@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import Converter from './components/Converter'
+import LangToggle from './components/LangToggle'
 
 const DOWNLOAD_URL =
   'https://github.com/ravi-arnan/myheic/releases/latest/download/MyHeic-Setup.exe'
@@ -8,7 +10,7 @@ const GITHUB_URL = 'https://github.com/ravi-arnan/myheic'
 
 export default function Home(): React.JSX.Element {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-white">
       <Header />
       <Hero />
       <Features />
@@ -20,59 +22,68 @@ export default function Home(): React.JSX.Element {
 }
 
 function Header(): React.JSX.Element {
+  const t = useTranslations('header')
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-[color:var(--color-line)] bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-[color:var(--color-brand)] text-base font-bold text-white">
             M
           </div>
-          <span className="font-semibold tracking-tight">MyHeic</span>
+          <span className="text-lg font-bold tracking-tight text-[color:var(--color-ink)]">
+            MyHeic
+          </span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-slate-300 sm:flex">
-          <a href="#desktop" className="hover:text-white">
-            Desktop app
+        <nav className="hidden items-center gap-6 text-sm font-medium text-[color:var(--color-ink-muted)] sm:flex">
+          <a
+            href="#desktop"
+            className="transition-colors hover:text-[color:var(--color-ink)]"
+          >
+            {t('desktopApp')}
           </a>
-          <a href="#faq" className="hover:text-white">
-            FAQ
+          <a href="#faq" className="transition-colors hover:text-[color:var(--color-ink)]">
+            {t('faq')}
           </a>
         </nav>
-        <a
-          href={DONATE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden rounded-md border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-200 hover:border-slate-600 hover:bg-slate-800 sm:inline-flex"
-        >
-          Traktir kopi
-        </a>
+        <div className="flex items-center gap-3">
+          <LangToggle />
+          <a
+            href={DONATE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden rounded-xl border border-[color:var(--color-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[color:var(--color-ink)] shadow-[0_1px_4px_rgba(16,24,40,0.04)] transition-colors hover:border-[color:var(--color-ink-soft)] sm:inline-flex"
+          >
+            {t('donate')}
+          </a>
+        </div>
       </div>
     </header>
   )
 }
 
 function Hero(): React.JSX.Element {
+  const t = useTranslations('hero')
   return (
     <section className="relative overflow-hidden">
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-50"
         style={{
           background:
-            'radial-gradient(60% 50% at 50% 0%, rgba(99,102,241,0.18) 0%, transparent 70%)'
+            'radial-gradient(60% 50% at 50% 0%, rgba(113,50,245,0.08) 0%, transparent 70%)'
         }}
       />
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-10 pb-16 text-center sm:pt-14 sm:pb-20">
-        <span className="mb-3 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
-          Gratis · Tanpa login · Offline
+      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
+        <span className="mb-4 rounded-full border border-[color:var(--color-line)] bg-white px-3 py-1 text-xs font-medium text-[color:var(--color-ink-muted)] shadow-[0_1px_4px_rgba(16,24,40,0.04)]">
+          {t('eyebrow')}
         </span>
-        <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-          Foto HEIC dari HP, jadi JPG{' '}
-          <span className="whitespace-nowrap bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-            dalam sekali klik
+        <h1 className="max-w-3xl text-balance text-3xl font-bold leading-[1.17] tracking-[-0.5px] text-[color:var(--color-ink)] sm:text-4xl md:text-5xl md:tracking-[-1px]">
+          {t('titleMain')}{' '}
+          <span className="whitespace-nowrap text-[color:var(--color-brand)]">
+            {t('titleAccent')}
           </span>
         </h1>
-        <p className="mt-3 max-w-xl text-balance text-sm text-slate-400 sm:text-base">
-          Drop file HEIC kamu di bawah — convert langsung di browser, ga perlu install
-          apa-apa.
+        <p className="mt-4 max-w-xl text-balance text-base text-[color:var(--color-ink-muted)] sm:text-lg">
+          {t('subtitle')}
         </p>
 
         <div className="mt-8 w-full">
@@ -83,22 +94,57 @@ function Hero(): React.JSX.Element {
   )
 }
 
-function DesktopCta(): React.JSX.Element {
+function Features(): React.JSX.Element {
+  const t = useTranslations('features')
+  const keys = ['noLogin', 'free', 'offline', 'metadata', 'simple'] as const
   return (
-    <section id="desktop" className="border-t border-slate-800/60">
+    <section
+      id="features"
+      className="border-t border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)]"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-bold tracking-[-0.5px] text-[color:var(--color-ink)] sm:text-4xl">
+            {t('title')}
+          </h2>
+          <p className="mt-3 text-[color:var(--color-ink-muted)]">{t('subtitle')}</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {keys.map((key) => (
+            <div
+              key={key}
+              className="rounded-2xl border border-[color:var(--color-line)] bg-white p-6 shadow-[0_1px_4px_rgba(16,24,40,0.04)]"
+            >
+              <h3 className="text-lg font-semibold text-[color:var(--color-ink)]">
+                {t(`items.${key}.title`)}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-[color:var(--color-ink-muted)]">
+                {t(`items.${key}.description`)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function DesktopCta(): React.JSX.Element {
+  const t = useTranslations('desktopCta')
+  return (
+    <section id="desktop" className="border-t border-[color:var(--color-line)] bg-white">
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-10">
+        <div className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] p-6 sm:p-10">
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
-                Untuk batch besar
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[color:var(--color-brand-subtle)] px-3 py-1 text-xs font-medium text-[color:var(--color-brand)]">
+                {t('badge')}
               </div>
-              <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                Convert ratusan file? Pakai versi desktop.
+              <h3 className="text-2xl font-bold tracking-[-0.5px] text-[color:var(--color-ink)] sm:text-3xl">
+                {t('title')}
               </h3>
-              <p className="mt-2 text-sm text-slate-400 sm:text-base">
-                MyHeic untuk Windows — drag folder, convert sekaligus, save langsung ke
-                folder pilihan kamu. Cocok untuk backup foto dari HP.
+              <p className="mt-2 text-sm text-[color:var(--color-ink-muted)] sm:text-base">
+                {t('description')}
               </p>
             </div>
             <div className="flex shrink-0 flex-col gap-2 sm:items-end">
@@ -106,18 +152,18 @@ function DesktopCta(): React.JSX.Element {
                 href={DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[color:var(--color-brand)] px-4 py-3 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(113,50,245,0.18)] transition-colors hover:bg-[color:var(--color-brand-dark)]"
               >
                 <DownloadIcon />
-                Download untuk Windows
+                {t('downloadCta')}
               </a>
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-slate-500 hover:text-slate-300"
+                className="text-xs text-[color:var(--color-ink-soft)] transition-colors hover:text-[color:var(--color-ink-muted)]"
               >
-                Lihat source code di GitHub →
+                {t('githubCta')}
               </a>
             </div>
           </div>
@@ -127,112 +173,40 @@ function DesktopCta(): React.JSX.Element {
   )
 }
 
-function Features(): React.JSX.Element {
-  const items = [
-    {
-      title: 'Tanpa login',
-      description:
-        'Tidak perlu daftar akun, kasih email, atau verifikasi apa-apa. Buka, drop file, selesai.'
-    },
-    {
-      title: 'Gratis selamanya',
-      description:
-        'Tidak ada batas konversi, watermark, atau biaya tahunan. Semua fitur tersedia tanpa bayar.'
-    },
-    {
-      title: '100% Offline',
-      description:
-        'Foto tidak pernah di-upload ke server. Konversi 100% di browser/komputer kamu.'
-    },
-    {
-      title: 'Metadata terjaga',
-      description:
-        'EXIF asli (datetime, GPS, kamera, ISO, exposure) ikut ke JPG hasil. Foto tetap rapi di galeri.'
-    },
-    {
-      title: 'Dirancang untuk awam',
-      description:
-        'Bahasa Indonesia, antarmuka simpel. Cocok untuk dipakai orang tua di rumah.'
-    }
-  ]
-  return (
-    <section id="fitur" className="border-t border-slate-800/60">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Yang bikin MyHeic beda
-          </h2>
-          <p className="mt-3 text-slate-400">
-            Dibikin karena converter online berbayar Rp400rb/tahun itu bikin frustrasi.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl border border-slate-800 bg-slate-900/40 p-6"
-            >
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+interface FaqItem {
+  q: string
+  a: string
 }
 
-
 function Faq(): React.JSX.Element {
-  const items = [
-    {
-      q: 'Kenapa HP saya menyimpan foto sebagai HEIC, bukan JPG?',
-      a: 'HEIC adalah format kompresi modern yang membuat file foto ~50% lebih kecil dengan kualitas yang sama. Beberapa Samsung dan semua iPhone modern menggunakannya saat memori menipis atau mode "high efficiency" aktif. Sayangnya, banyak laptop/PC yang belum bisa membukanya tanpa software tambahan.'
-    },
-    {
-      q: 'Apakah foto saya di-upload ke server?',
-      a: 'Tidak. Konversi terjadi 100% di browser/komputer kamu — foto tidak pernah dikirim keluar. Versi web pakai WebAssembly libheif yang jalan langsung di browser. Versi desktop sepenuhnya offline.'
-    },
-    {
-      q: 'Mac/Linux/Chromebook bisa pakai?',
-      a: 'Versi web bisa dipakai di semua OS (Mac, Linux, Chromebook, bahkan HP) — cukup buka https://myheic.vercel.app di browser modern. Versi desktop saat ini Windows-only karena di sanalah masalah HEIC paling sering muncul.'
-    },
-    {
-      q: 'Kenapa Windows menampilkan peringatan saat install versi desktop?',
-      a: 'Karena MyHeic belum ditandatangani digital (code signing certificate harganya jutaan/tahun, dan kami pilih tetap gratis). Windows memunculkan SmartScreen warning untuk software baru. Klik "More info" → "Run anyway" untuk lanjut. Atau pakai versi web di atas — ga perlu install.'
-    },
-    {
-      q: 'Kapan harus pakai versi desktop?',
-      a: 'Pakai versi web untuk konversi cepat 1-10 file. Pakai versi desktop kalau kamu sering convert ratusan file, butuh batch save ke folder pilihan, atau kerja offline tanpa browser.'
-    },
-    {
-      q: 'Apakah benar-benar gratis selamanya?',
-      a: 'Ya. Tidak ada batas konversi, tidak ada watermark, tidak ada langganan. Kalau kamu terbantu, kamu bisa traktir kopi via tombol donasi — tapi sepenuhnya opsional.'
-    }
-  ]
+  const t = useTranslations('faq')
+  const items = t.raw('items') as FaqItem[]
   return (
-    <section id="faq" className="border-t border-slate-800/60">
+    <section
+      id="faq"
+      className="border-t border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)]"
+    >
       <div className="mx-auto max-w-3xl px-6 py-20 sm:py-24">
         <div className="mb-10 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Pertanyaan umum
+          <h2 className="text-3xl font-bold tracking-[-0.5px] text-[color:var(--color-ink)] sm:text-4xl">
+            {t('title')}
           </h2>
         </div>
-        <div className="space-y-4">
-          {items.map((item) => (
+        <div className="space-y-3">
+          {items.map((item, idx) => (
             <details
-              key={item.q}
-              className="group rounded-xl border border-slate-800 bg-slate-900/40 p-5 open:bg-slate-900/70"
+              key={idx}
+              className="group rounded-2xl border border-[color:var(--color-line)] bg-white p-5 shadow-[0_1px_4px_rgba(16,24,40,0.04)] open:border-[color:var(--color-brand-subtle)]"
             >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-medium text-white">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-[color:var(--color-ink)] sm:text-base">
                 <span>{item.q}</span>
-                <span className="text-slate-500 transition-transform group-open:rotate-45">
+                <span className="text-[color:var(--color-ink-soft)] transition-transform group-open:rotate-45">
                   +
                 </span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">{item.a}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-ink-muted)]">
+                {item.a}
+              </p>
             </details>
           ))}
         </div>
@@ -242,26 +216,27 @@ function Faq(): React.JSX.Element {
 }
 
 function Footer(): React.JSX.Element {
+  const t = useTranslations('footer')
   return (
-    <footer className="mt-auto border-t border-slate-800/60">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-slate-500 sm:flex-row">
-        <div>© {new Date().getFullYear()} MyHeic. Dibuat di Indonesia.</div>
+    <footer className="mt-auto border-t border-[color:var(--color-line)] bg-white">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-[color:var(--color-ink-soft)] sm:flex-row">
+        <div>{t('copyright', { year: new Date().getFullYear() })}</div>
         <div className="flex items-center gap-5">
           <a
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-slate-300"
+            className="transition-colors hover:text-[color:var(--color-ink)]"
           >
-            GitHub
+            {t('github')}
           </a>
           <a
             href={DONATE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-slate-300"
+            className="transition-colors hover:text-[color:var(--color-ink)]"
           >
-            Traktir kopi
+            {t('donate')}
           </a>
         </div>
       </div>

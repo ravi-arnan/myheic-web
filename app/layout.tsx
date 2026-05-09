@@ -1,37 +1,46 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist } from 'next/font/google'
+import { IBM_Plex_Sans } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
+const plex = IBM_Plex_Sans({
+  variable: '--font-plex',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700']
 })
 
-export const metadata: Metadata = {
-  title: 'MyHeic — Konversi HEIC ke JPG, gratis & offline',
-  description:
-    'Aplikasi desktop ringan untuk mengubah file HEIC dari HP Samsung & iPhone menjadi JPG. Gratis selamanya, jalan offline, tanpa batas konversi.',
-  metadataBase: new URL('https://myheic.app'),
-  openGraph: {
-    title: 'MyHeic — Konversi HEIC ke JPG',
-    description: 'Gratis, offline, tanpa batas konversi. Dibuat untuk Indonesia.',
-    type: 'website',
-    locale: 'id_ID'
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, locale] = await Promise.all([getTranslations('metadata'), getLocale()])
+  return {
+    title: t('title'),
+    description: t('description'),
+    metadataBase: new URL('https://myheic.vercel.app'),
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      type: 'website',
+      locale: locale === 'en' ? 'en_US' : 'id_ID'
+    }
   }
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0f172a'
+  themeColor: '#ffffff'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
-}>): React.JSX.Element {
+}>): Promise<React.JSX.Element> {
+  const locale = await getLocale()
+  const messages = await getMessages()
   return (
-    <html lang="id" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-slate-950 text-slate-100">{children}</body>
+    <html lang={locale} className={`${plex.variable} h-full antialiased`}>
+      <body className="min-h-full bg-white text-[color:var(--color-ink)]">
+        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      </body>
     </html>
   )
 }

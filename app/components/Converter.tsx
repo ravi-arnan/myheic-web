@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { attachExifToJpeg, buildExifBytesFromHeic } from '../lib/exif'
 
 type FileStatus = 'pending' | 'converting' | 'done' | 'error'
@@ -23,14 +24,6 @@ function formatBytes(bytes: number | undefined): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-function qualityLabel(q: number): string {
-  if (q >= 95) return 'Maksimum'
-  if (q >= 85) return 'Tinggi'
-  if (q >= 70) return 'Disarankan'
-  if (q >= 50) return 'Hemat'
-  return 'Rendah'
-}
-
 function isHeicFile(file: File): boolean {
   if (/\.(heic|heif)$/i.test(file.name)) return true
   if (file.type === 'image/heic' || file.type === 'image/heif') return true
@@ -42,6 +35,7 @@ function jpgNameFor(name: string): string {
 }
 
 export default function Converter(): React.JSX.Element {
+  const t = useTranslations('converter')
   const [items, setItems] = useState<Item[]>([])
   const [quality, setQuality] = useState(80)
   const [isDragging, setIsDragging] = useState(false)
@@ -49,6 +43,14 @@ export default function Converter(): React.JSX.Element {
   const dragCounter = useRef(0)
   const inputId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const presetKey = useMemo<'maximum' | 'high' | 'recommended' | 'economy' | 'low'>(() => {
+    if (quality >= 95) return 'maximum'
+    if (quality >= 85) return 'high'
+    if (quality >= 70) return 'recommended'
+    if (quality >= 50) return 'economy'
+    return 'low'
+  }, [quality])
 
   const addFiles = useCallback((files: File[]) => {
     const heicFiles = files.filter(isHeicFile)
@@ -70,7 +72,6 @@ export default function Converter(): React.JSX.Element {
 
   useEffect(() => {
     return () => {
-      // Free blob URLs on unmount
       setItems((prev) => {
         prev.forEach((i) => i.outputUrl && URL.revokeObjectURL(i.outputUrl))
         return prev
@@ -181,7 +182,7 @@ export default function Converter(): React.JSX.Element {
       } catch (err) {
         updateItem(item.id, {
           status: 'error',
-          error: err instanceof Error ? err.message : 'Gagal konversi file ini'
+          error: err instanceof Error ? err.message : t('errorFallback')
         })
       }
     }
@@ -215,25 +216,29 @@ export default function Converter(): React.JSX.Element {
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/60 shadow-2xl shadow-indigo-900/10">
-        <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-3">
+      <div className="overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+        <div className="flex items-center justify-between border-b border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] px-4 py-3">
           <div className="flex items-center gap-2">
-            <div className="grid h-6 w-6 place-items-center rounded bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+            <div className="grid h-7 w-7 place-items-center rounded-lg bg-[color:var(--color-brand)] text-xs font-bold text-white">
               M
             </div>
-            <span className="text-sm font-medium text-slate-200">Converter Online</span>
+            <span className="text-sm font-semibold text-[color:var(--color-ink)]">
+              {t('cardTitle')}
+            </span>
           </div>
-          <div className="text-[11px] text-slate-500">100% di browser kamu · tanpa upload</div>
+          <div className="text-[11px] text-[color:var(--color-ink-soft)]">
+            {t('cardTagline')}
+          </div>
         </div>
 
         <div className="p-6 sm:p-8">
           <button
             type="button"
             onClick={handlePick}
-            className={`flex w-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed p-10 text-center transition-colors ${
+            className={`flex w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-10 text-center transition-colors ${
               isDragging
-                ? 'border-indigo-400 bg-indigo-500/10'
-                : 'border-slate-700 bg-slate-950/50 hover:border-slate-600'
+                ? 'border-[color:var(--color-brand)] bg-[color:var(--color-brand-subtle)]'
+                : 'border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] hover:border-[color:var(--color-ink-soft)]'
             }`}
           >
             <svg
@@ -245,17 +250,21 @@ export default function Converter(): React.JSX.Element {
               strokeWidth="1.6"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className={isDragging ? 'text-indigo-300' : 'text-slate-500'}
+              className={
+                isDragging
+                  ? 'text-[color:var(--color-brand)]'
+                  : 'text-[color:var(--color-ink-soft)]'
+              }
               aria-hidden
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
               <line x1="12" y1="3" x2="12" y2="15" />
             </svg>
-            <div className="text-sm font-medium text-slate-200">
-              {isDragging ? 'Lepaskan untuk upload' : 'Drag & drop file HEIC ke sini'}
+            <div className="text-sm font-semibold text-[color:var(--color-ink)]">
+              {isDragging ? t('dropDragging') : t('dropIdle')}
             </div>
-            <div className="text-xs text-slate-500">atau klik untuk pilih file</div>
+            <div className="text-xs text-[color:var(--color-ink-soft)]">{t('dropHint')}</div>
             <input
               ref={inputRef}
               id={inputId}
@@ -269,18 +278,18 @@ export default function Converter(): React.JSX.Element {
 
           {items.length > 0 && (
             <>
-              <div className="mt-6 flex items-center justify-between text-xs text-slate-400">
+              <div className="mt-6 flex items-center justify-between text-xs text-[color:var(--color-ink-muted)]">
                 <div>
-                  {stats.total} file · {stats.done} selesai
-                  {stats.errors > 0 ? ` · ${stats.errors} error` : ''}
+                  {t('counterFiles', { total: stats.total, done: stats.done })}
+                  {stats.errors > 0 ? t('counterErrors', { errors: stats.errors }) : ''}
                 </div>
                 <button
                   type="button"
                   onClick={handleClear}
                   disabled={isConverting}
-                  className="text-slate-500 hover:text-slate-300 disabled:opacity-40"
+                  className="font-medium text-[color:var(--color-ink-soft)] transition-colors hover:text-[color:var(--color-ink)] disabled:opacity-40"
                 >
-                  Hapus semua
+                  {t('clearAll')}
                 </button>
               </div>
 
@@ -288,16 +297,18 @@ export default function Converter(): React.JSX.Element {
                 {items.map((item) => (
                   <li
                     key={item.id}
-                    className="flex items-center gap-3 rounded-md border border-slate-800 bg-slate-950/50 px-3 py-2.5 text-sm"
+                    className="flex items-center gap-3 rounded-xl border border-[color:var(--color-line)] bg-white px-3 py-2.5 text-sm shadow-[0_1px_4px_rgba(16,24,40,0.04)]"
                   >
                     <StatusBadge status={item.status} />
                     <div className="min-w-0 flex-1">
-                      <div className="truncate font-medium text-slate-200">{item.name}</div>
-                      <div className="truncate text-xs text-slate-500">
+                      <div className="truncate font-medium text-[color:var(--color-ink)]">
+                        {item.name}
+                      </div>
+                      <div className="truncate text-xs text-[color:var(--color-ink-soft)]">
                         {item.status === 'done' && item.outputBytes
                           ? `${formatBytes(item.inputBytes)} → ${formatBytes(item.outputBytes)} (${(item.outputBytes / item.inputBytes).toFixed(1)}x)`
                           : item.status === 'error'
-                            ? (item.error ?? 'Gagal konversi')
+                            ? (item.error ?? t('errorFallback'))
                             : formatBytes(item.inputBytes)}
                       </div>
                     </div>
@@ -305,19 +316,32 @@ export default function Converter(): React.JSX.Element {
                       <button
                         type="button"
                         onClick={() => handleDownload(item)}
-                        className="rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
+                        className="rounded-xl bg-[color:var(--color-brand)] px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[color:var(--color-brand-dark)]"
                       >
-                        Download
+                        {t('download')}
                       </button>
                     )}
                     <button
                       type="button"
                       onClick={() => handleRemove(item.id)}
                       disabled={isConverting && item.status === 'converting'}
-                      className="text-xs text-slate-500 hover:text-rose-400 disabled:opacity-40"
-                      aria-label="Hapus"
+                      className="text-[color:var(--color-ink-soft)] transition-colors hover:text-[color:var(--color-ink)] disabled:opacity-40"
+                      aria-label={t('removeAria')}
                     >
-                      ×
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
                     </button>
                   </li>
                 ))}
@@ -326,13 +350,13 @@ export default function Converter(): React.JSX.Element {
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 border-t border-slate-800 bg-slate-950/40 px-6 py-4">
+        <div className="flex flex-wrap items-center gap-4 border-t border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] px-6 py-4">
           <div className="flex items-center gap-2">
             <span
-              className="cursor-help text-xs text-slate-400"
-              title="JPG selalu lebih besar dari HEIC karena kompresi HEIC (HEVC) lebih efisien. Slider ini kontrol kualitas/ukuran JPG-nya saja. Disarankan 75-85."
+              className="cursor-help text-xs font-medium text-[color:var(--color-ink-muted)]"
+              title={t('qualityTooltip')}
             >
-              Quality ⓘ
+              {t('qualityLabel')} ⓘ
             </span>
             <input
               type="range"
@@ -342,11 +366,13 @@ export default function Converter(): React.JSX.Element {
               value={quality}
               onChange={(e) => setQuality(Number(e.target.value))}
               disabled={isConverting}
-              className="w-32 accent-indigo-500"
+              className="w-32 accent-[color:var(--color-brand)]"
             />
-            <span className="w-8 text-xs tabular-nums text-slate-300">{quality}</span>
-            <span className="text-[10px] uppercase tracking-wide text-slate-500">
-              {qualityLabel(quality)}
+            <span className="w-8 text-xs font-semibold tabular-nums text-[color:var(--color-ink)]">
+              {quality}
+            </span>
+            <span className="text-[10px] font-medium uppercase tracking-wide text-[color:var(--color-ink-soft)]">
+              {t(`preset.${presetKey}`)}
             </span>
           </div>
 
@@ -355,18 +381,18 @@ export default function Converter(): React.JSX.Element {
               <button
                 type="button"
                 onClick={handleDownloadAll}
-                className="rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:border-slate-600 hover:bg-slate-800"
+                className="rounded-xl border border-[color:var(--color-line)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--color-ink)] transition-colors hover:border-[color:var(--color-ink-soft)]"
               >
-                Download semua
+                {t('downloadAll')}
               </button>
             )}
             <button
               type="button"
               onClick={handleConvertAll}
               disabled={!canConvert || isConverting}
-              className="rounded-md bg-indigo-600 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-[color:var(--color-brand)] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(113,50,245,0.18)] transition-colors hover:bg-[color:var(--color-brand-dark)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
             >
-              {isConverting ? 'Converting…' : 'Convert'}
+              {isConverting ? t('convertBusy') : t('convertIdle')}
             </button>
           </div>
         </div>
@@ -376,18 +402,19 @@ export default function Converter(): React.JSX.Element {
 }
 
 function StatusBadge({ status }: { status: FileStatus }): React.JSX.Element {
-  const map: Record<FileStatus, { label: string; className: string }> = {
-    pending: { label: 'Pending', className: 'bg-slate-700 text-slate-300' },
-    converting: { label: 'Converting', className: 'bg-amber-500/20 text-amber-300' },
-    done: { label: 'Done', className: 'bg-emerald-500/20 text-emerald-300' },
-    error: { label: 'Error', className: 'bg-rose-500/20 text-rose-300' }
+  const t = useTranslations('converter.status')
+  const map: Record<FileStatus, string> = {
+    pending:
+      'bg-[color:var(--color-line-soft)] text-[color:var(--color-ink-muted)]',
+    converting: 'bg-amber-100 text-amber-700',
+    done: 'bg-[color:var(--color-success-bg)] text-[color:var(--color-success-ink)]',
+    error: 'bg-rose-100 text-rose-700'
   }
-  const item = map[status]
   return (
     <span
-      className={`inline-flex h-5 w-16 items-center justify-center rounded-full text-[10px] font-medium uppercase tracking-wide ${item.className}`}
+      className={`inline-flex h-5 w-20 items-center justify-center rounded-full text-[10px] font-semibold uppercase tracking-wide ${map[status]}`}
     >
-      {item.label}
+      {t(status)}
     </span>
   )
 }

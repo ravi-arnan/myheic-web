@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "title": "MyHeic — Konversi HEIC ke JPG, gratis & offline",
+    "description": "Convert file HEIC dari HP Samsung & iPhone menjadi JPG, langsung di browser. Gratis, tanpa login, offline, EXIF terjaga.",
+    "ogTitle": "MyHeic — Konversi HEIC ke JPG",
+    "ogDescription": "Gratis, tanpa login, offline. Dibuat untuk Indonesia."
+  },
+  "header": {
+    "desktopApp": "Desktop app",
+    "faq": "FAQ",
+    "donate": "Traktir kopi"
+  },
+  "lang": {
+    "label": "Bahasa",
+    "id": "ID",
+    "en": "EN"
+  },
+  "hero": {
+    "eyebrow": "Gratis · Tanpa login · Offline",
+    "titleMain": "Foto HEIC dari HP, jadi JPG",
+    "titleAccent": "dalam sekali klik",
+    "subtitle": "Drop file HEIC kamu di bawah — convert langsung di browser, ga perlu install apa-apa."
+  },
+  "converter": {
+    "cardTitle": "Converter Online",
+    "cardTagline": "100% di browser kamu · tanpa upload",
+    "dropIdle": "Drag & drop file HEIC ke sini",
+    "dropDragging": "Lepaskan untuk upload",
+    "dropHint": "atau klik untuk pilih file",
+    "counterEmpty": "Belum ada file",
+    "counterFiles": "{total} file · {done} selesai",
+    "counterErrors": " · {errors} error",
+    "clearAll": "Hapus semua",
+    "emptyHint": "Tambahkan file untuk mulai konversi.",
+    "removeAria": "Hapus",
+    "errorFallback": "Gagal konversi file ini",
+    "download": "Download",
+    "downloadAll": "Download semua",
+    "convertIdle": "Convert",
+    "convertBusy": "Converting…",
+    "qualityLabel": "Quality",
+    "qualityTooltip": "JPG selalu lebih besar dari HEIC karena kompresi HEIC (HEVC) lebih efisien. Slider ini kontrol kualitas/ukuran JPG-nya saja. Disarankan 75-85.",
+    "preset": {
+      "maximum": "Maksimum",
+      "high": "Tinggi",
+      "recommended": "Disarankan",
+      "economy": "Hemat",
+      "low": "Rendah"
+    },
+    "status": {
+      "pending": "Pending",
+      "converting": "Converting",
+      "done": "Done",
+      "error": "Error"
+    }
+  },
+  "features": {
+    "title": "Yang bikin MyHeic beda",
+    "subtitle": "Dibikin karena converter online berbayar Rp400rb/tahun itu bikin frustrasi.",
+    "items": {
+      "noLogin": {
+        "title": "Tanpa login",
+        "description": "Tidak perlu daftar akun, kasih email, atau verifikasi apa-apa. Buka, drop file, selesai."
+      },
+      "free": {
+        "title": "Gratis selamanya",
+        "description": "Tidak ada batas konversi, watermark, atau biaya tahunan. Semua fitur tersedia tanpa bayar."
+      },
+      "offline": {
+        "title": "100% Offline",
+        "description": "Foto tidak pernah di-upload ke server. Konversi 100% di browser/komputer kamu."
+      },
+      "metadata": {
+        "title": "Metadata terjaga",
+        "description": "EXIF asli (datetime, GPS, kamera, ISO, exposure) ikut ke JPG hasil. Foto tetap rapi di galeri."
+      },
+      "simple": {
+        "title": "Dirancang untuk awam",
+        "description": "Bahasa Indonesia & Inggris, antarmuka simpel. Cocok untuk dipakai orang tua di rumah."
+      }
+    }
+  },
+  "desktopCta": {
+    "badge": "Untuk batch besar",
+    "title": "Convert ratusan file? Pakai versi desktop.",
+    "description": "MyHeic untuk Windows — drag folder, convert sekaligus, save langsung ke folder pilihan kamu. Cocok untuk backup foto dari HP.",
+    "downloadCta": "Download untuk Windows",
+    "githubCta": "Lihat source code di GitHub →"
+  },
+  "faq": {
+    "title": "Pertanyaan umum",
+    "items": [
+      {
+        "q": "Kenapa HP saya menyimpan foto sebagai HEIC, bukan JPG?",
+        "a": "HEIC adalah format kompresi modern yang membuat file foto ~50% lebih kecil dengan kualitas yang sama. Beberapa Samsung dan semua iPhone modern menggunakannya saat memori menipis atau mode \"high efficiency\" aktif. Sayangnya, banyak laptop/PC yang belum bisa membukanya tanpa software tambahan."
+      },
+      {
+        "q": "Apakah foto saya di-upload ke server?",
+        "a": "Tidak. Konversi terjadi 100% di browser/komputer kamu — foto tidak pernah dikirim keluar. Versi web pakai WebAssembly libheif yang jalan langsung di browser. Versi desktop sepenuhnya offline."
+      },
+      {
+        "q": "Mac/Linux/Chromebook bisa pakai?",
+        "a": "Versi web bisa dipakai di semua OS (Mac, Linux, Chromebook, bahkan HP) — cukup buka https://myheic.vercel.app di browser modern. Versi desktop saat ini Windows-only karena di sanalah masalah HEIC paling sering muncul."
+      },
+      {
+        "q": "Kenapa Windows menampilkan peringatan saat install versi desktop?",
+        "a": "Karena MyHeic belum ditandatangani digital (code signing certificate harganya jutaan/tahun, dan kami pilih tetap gratis). Windows memunculkan SmartScreen warning untuk software baru. Klik \"More info\" → \"Run anyway\" untuk lanjut. Atau pakai versi web di atas — ga perlu install."
+      },
+      {
+        "q": "Kapan harus pakai versi desktop?",
+        "a": "Pakai versi web untuk konversi cepat 1-10 file. Pakai versi desktop kalau kamu sering convert ratusan file, butuh batch save ke folder pilihan, atau kerja offline tanpa browser."
+      },
+      {
+        "q": "Apakah benar-benar gratis selamanya?",
+        "a": "Ya. Tidak ada batas konversi, tidak ada watermark, tidak ada langganan. Kalau kamu terbantu, kamu bisa traktir kopi via tombol donasi — tapi sepenuhnya opsional."
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© {year} MyHeic. Dibuat di Indonesia.",
+    "github": "GitHub",
+    "donate": "Traktir kopi"
+  }
+}

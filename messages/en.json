@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "title": "MyHeic — Convert HEIC to JPG, free & offline",
+    "description": "Convert HEIC files from Samsung & iPhone phones into JPG, right in your browser. Free, no login, offline-capable, EXIF preserved.",
+    "ogTitle": "MyHeic — Convert HEIC to JPG",
+    "ogDescription": "Free, no login, offline. Made in Indonesia."
+  },
+  "header": {
+    "desktopApp": "Desktop app",
+    "faq": "FAQ",
+    "donate": "Buy me a coffee"
+  },
+  "lang": {
+    "label": "Language",
+    "id": "ID",
+    "en": "EN"
+  },
+  "hero": {
+    "eyebrow": "Free · No login · Offline",
+    "titleMain": "HEIC photos from your phone, to JPG",
+    "titleAccent": "in one click",
+    "subtitle": "Drop your HEIC files below — convert right in your browser, no install required."
+  },
+  "converter": {
+    "cardTitle": "Online Converter",
+    "cardTagline": "100% in your browser · no upload",
+    "dropIdle": "Drag & drop HEIC files here",
+    "dropDragging": "Release to upload",
+    "dropHint": "or click to pick files",
+    "counterEmpty": "No files yet",
+    "counterFiles": "{total} files · {done} done",
+    "counterErrors": " · {errors} error",
+    "clearAll": "Clear all",
+    "emptyHint": "Add files to start converting.",
+    "removeAria": "Remove",
+    "errorFallback": "Failed to convert this file",
+    "download": "Download",
+    "downloadAll": "Download all",
+    "convertIdle": "Convert",
+    "convertBusy": "Converting…",
+    "qualityLabel": "Quality",
+    "qualityTooltip": "JPG is always larger than HEIC because HEIC's HEVC compression is more efficient. This slider only controls the JPG quality/size. 75–85 is recommended.",
+    "preset": {
+      "maximum": "Maximum",
+      "high": "High",
+      "recommended": "Recommended",
+      "economy": "Economy",
+      "low": "Low"
+    },
+    "status": {
+      "pending": "Pending",
+      "converting": "Converting",
+      "done": "Done",
+      "error": "Error"
+    }
+  },
+  "features": {
+    "title": "What makes MyHeic different",
+    "subtitle": "Built because paid online converters at $25/year are frustrating.",
+    "items": {
+      "noLogin": {
+        "title": "No login",
+        "description": "No account, no email, no verification. Open, drop a file, done."
+      },
+      "free": {
+        "title": "Free forever",
+        "description": "No conversion limits, no watermark, no subscription. Every feature is available without paying."
+      },
+      "offline": {
+        "title": "100% Offline",
+        "description": "Photos are never uploaded to a server. Conversion happens entirely in your browser/computer."
+      },
+      "metadata": {
+        "title": "EXIF preserved",
+        "description": "Original EXIF (datetime, GPS, camera, ISO, exposure) is carried into the output JPG. Your library stays organized."
+      },
+      "simple": {
+        "title": "Built for everyone",
+        "description": "Indonesian & English UI, simple interface. Easy enough for non-tech family members at home."
+      }
+    }
+  },
+  "desktopCta": {
+    "badge": "For large batches",
+    "title": "Converting hundreds of files? Use the desktop version.",
+    "description": "MyHeic for Windows — drag a folder, batch convert, save straight to the folder of your choice. Ideal for backing up photos from your phone.",
+    "downloadCta": "Download for Windows",
+    "githubCta": "View source on GitHub →"
+  },
+  "faq": {
+    "title": "Frequently asked",
+    "items": [
+      {
+        "q": "Why does my phone save photos as HEIC instead of JPG?",
+        "a": "HEIC is a modern compression format that produces ~50% smaller files at the same visual quality. Some Samsung phones and all modern iPhones use it when storage runs low or 'high efficiency' mode is on. Unfortunately, many laptops/PCs can't open HEIC without extra software."
+      },
+      {
+        "q": "Are my photos uploaded to a server?",
+        "a": "No. Conversion happens 100% in your browser/computer — photos are never sent anywhere. The web version uses WebAssembly libheif running directly in your browser. The desktop version is fully offline."
+      },
+      {
+        "q": "Does it work on Mac/Linux/Chromebook?",
+        "a": "The web version works on every OS (Mac, Linux, Chromebook, even mobile) — just open https://myheic.vercel.app in a modern browser. The desktop version is Windows-only for now because that's where HEIC issues are most common."
+      },
+      {
+        "q": "Why does Windows show a warning when I install the desktop version?",
+        "a": "Because MyHeic isn't yet code-signed (signing certificates cost hundreds of dollars/year, and we chose to keep this free). Windows shows a SmartScreen warning for new software. Click 'More info' → 'Run anyway' to proceed. Or use the web version above — no install needed."
+      },
+      {
+        "q": "When should I use the desktop version?",
+        "a": "Use the web version for quick 1–10 file conversions. Use the desktop version when you regularly convert hundreds of files, need batch save to a chosen folder, or work offline without a browser."
+      },
+      {
+        "q": "Is it really free forever?",
+        "a": "Yes. No conversion limits, no watermark, no subscription. If you find it useful, there's an optional 'Buy me a coffee' button — but it's entirely up to you."
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© {year} MyHeic. Made in Indonesia.",
+    "github": "GitHub",
+    "donate": "Buy me a coffee"
+  }
+}
