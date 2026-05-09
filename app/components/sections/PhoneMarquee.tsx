@@ -20,7 +20,10 @@ export default function PhoneMarquee(): React.JSX.Element {
               'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}
         >
-          <div className="flex w-max animate-[myheic-marquee_38s_linear_infinite] items-center gap-12 whitespace-nowrap py-2">
+          <div
+            className="myheic-marquee-track flex w-max items-center gap-12 whitespace-nowrap py-2"
+            style={{ animation: 'myheic-marquee 38s linear infinite' }}
+          >
             {loop.map((brand, idx) => (
               <div
                 key={`${brand}-${idx}`}

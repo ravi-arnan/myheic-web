@@ -95,7 +95,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-\[myheic-marquee_38s_linear_infinite\] {
-    animation: none;
+  .myheic-marquee-track {
+    animation: none !important;
   }
 }
