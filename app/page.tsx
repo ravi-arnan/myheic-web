@@ -30,9 +30,6 @@ function Header(): React.JSX.Element {
           <span className="font-semibold tracking-tight">MyHeic</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-slate-300 sm:flex">
-          <a href="#fitur" className="hover:text-white">
-            Fitur
-          </a>
           <a href="#desktop" className="hover:text-white">
             Desktop app
           </a>
@@ -63,29 +60,24 @@ function Hero(): React.JSX.Element {
             'radial-gradient(60% 50% at 50% 0%, rgba(99,102,241,0.18) 0%, transparent 70%)'
         }}
       />
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-6 pt-16 pb-20 text-center sm:pt-20 sm:pb-24">
-        <span className="mb-4 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
-          Gratis selamanya · Tanpa batas konversi
+      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-10 pb-16 text-center sm:pt-14 sm:pb-20">
+        <span className="mb-3 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
+          Gratis · Offline · Tanpa batas
         </span>
-        <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+        <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
           Foto HEIC dari HP, jadi JPG{' '}
           <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
             dalam sekali klik
           </span>
         </h1>
-        <p className="mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
-          HP Samsung atau iPhone simpan foto sebagai HEIC supaya hemat memori, tapi laptop
-          ga bisa buka. Drop file HEIC kamu langsung di bawah — convert sekarang, ga perlu
-          install apa-apa.
+        <p className="mt-3 max-w-xl text-sm text-slate-400 sm:text-base">
+          Drop file HEIC kamu di bawah — convert langsung di browser, ga perlu install
+          apa-apa.
         </p>
 
-        <div className="mt-10 w-full">
+        <div className="mt-8 w-full">
           <Converter />
         </div>
-
-        <p className="mt-6 text-xs text-slate-500">
-          Konversi 100% di browser kamu · Foto ga pernah keluar dari komputer
-        </p>
       </div>
     </section>
   )
