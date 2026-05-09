@@ -64,13 +64,13 @@ function Hero(): React.JSX.Element {
         <span className="mb-3 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
           Gratis · Offline · Tanpa batas
         </span>
-        <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+        <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
           Foto HEIC dari HP, jadi JPG{' '}
-          <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+          <span className="whitespace-nowrap bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
             dalam sekali klik
           </span>
         </h1>
-        <p className="mt-3 max-w-xl text-sm text-slate-400 sm:text-base">
+        <p className="mt-3 max-w-xl text-balance text-sm text-slate-400 sm:text-base">
           Drop file HEIC kamu di bawah — convert langsung di browser, ga perlu install
           apa-apa.
         </p>
