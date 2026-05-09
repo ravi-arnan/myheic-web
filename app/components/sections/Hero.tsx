@@ -24,8 +24,8 @@ export default function Hero(): React.JSX.Element {
   const { resolvedTheme } = useTheme()
   const colors = resolvedTheme === 'dark' ? AURORA_DARK : AURORA_LIGHT
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[640px] opacity-70 dark:opacity-90">
+    <section className="relative isolate overflow-hidden bg-[color:var(--color-surface)]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[640px] mix-blend-screen opacity-100 dark:mix-blend-normal dark:opacity-90">
         <Aurora colorStops={colors} amplitude={1.0} blend={0.55} speed={0.5} />
       </div>
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
