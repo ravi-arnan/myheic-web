@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Converter from './components/Converter'
 
 const DOWNLOAD_URL =
   'https://github.com/ravi-arnan/myheic/releases/latest/download/MyHeic-Setup.exe'
@@ -11,7 +12,7 @@ export default function Home(): React.JSX.Element {
       <Header />
       <Hero />
       <Features />
-      <HowItWorks />
+      <DesktopCta />
       <Faq />
       <Footer />
     </div>
@@ -32,8 +33,8 @@ function Header(): React.JSX.Element {
           <a href="#fitur" className="hover:text-white">
             Fitur
           </a>
-          <a href="#cara" className="hover:text-white">
-            Cara pakai
+          <a href="#desktop" className="hover:text-white">
+            Desktop app
           </a>
           <a href="#faq" className="hover:text-white">
             FAQ
@@ -62,7 +63,7 @@ function Hero(): React.JSX.Element {
             'radial-gradient(60% 50% at 50% 0%, rgba(99,102,241,0.18) 0%, transparent 70%)'
         }}
       />
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-6 pt-20 pb-24 text-center sm:pt-28 sm:pb-32">
+      <div className="mx-auto flex max-w-6xl flex-col items-center px-6 pt-16 pb-20 text-center sm:pt-20 sm:pb-24">
         <span className="mb-4 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
           Gratis selamanya · Tanpa batas konversi
         </span>
@@ -74,68 +75,58 @@ function Hero(): React.JSX.Element {
         </h1>
         <p className="mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
           HP Samsung atau iPhone simpan foto sebagai HEIC supaya hemat memori, tapi laptop
-          ga bisa buka. MyHeic ubah HEIC ke JPG di komputer kamu — gratis, offline, dan
-          tanpa upload ke server.
-        </p>
-        <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-          <a
-            href={DOWNLOAD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-indigo-600/20 transition-colors hover:bg-indigo-500"
-          >
-            <DownloadIcon />
-            Download untuk Windows
-          </a>
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm text-slate-200 hover:border-slate-600 hover:bg-slate-900"
-          >
-            Lihat di GitHub
-          </a>
-        </div>
-        <p className="mt-4 text-xs text-slate-500">
-          Windows 10/11 · ~80MB · Tanpa instalasi codec tambahan
+          ga bisa buka. Drop file HEIC kamu langsung di bawah — convert sekarang, ga perlu
+          install apa-apa.
         </p>
 
-        <div className="mt-16 w-full max-w-4xl">
-          <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/60 shadow-2xl shadow-indigo-900/10">
-            <div className="flex items-center gap-1.5 border-b border-slate-800 bg-slate-900 px-3 py-2">
-              <div className="h-3 w-3 rounded-full bg-rose-500/60" />
-              <div className="h-3 w-3 rounded-full bg-amber-500/60" />
-              <div className="h-3 w-3 rounded-full bg-emerald-500/60" />
-              <div className="ml-3 text-xs text-slate-500">MyHeic</div>
+        <div className="mt-10 w-full">
+          <Converter />
+        </div>
+
+        <p className="mt-6 text-xs text-slate-500">
+          Konversi 100% di browser kamu · Foto ga pernah keluar dari komputer
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function DesktopCta(): React.JSX.Element {
+  return (
+    <section id="desktop" className="border-t border-slate-800/60">
+      <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-10">
+          <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
+                Untuk batch besar
+              </div>
+              <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                Convert ratusan file? Pakai versi desktop.
+              </h3>
+              <p className="mt-2 text-sm text-slate-400 sm:text-base">
+                MyHeic untuk Windows — drag folder, convert sekaligus, save langsung ke
+                folder pilihan kamu. Cocok untuk backup foto dari HP.
+              </p>
             </div>
-            <div className="p-8">
-              <div className="rounded-lg border-2 border-dashed border-slate-700 bg-slate-950/50 p-10 text-center text-sm text-slate-500">
-                Drag & drop file HEIC ke sini
-              </div>
-              <div className="mt-4 space-y-2">
-                {[
-                  { name: 'IMG_4521.heic', status: 'Done', size: '3.2 MB → 1.1 MB' },
-                  { name: 'IMG_4522.heic', status: 'Done', size: '2.8 MB → 980 KB' },
-                  { name: 'IMG_4523.heic', status: 'Converting', size: '—' }
-                ].map((f) => (
-                  <div
-                    key={f.name}
-                    className="flex items-center gap-3 rounded-md border border-slate-800 bg-slate-950/40 px-3 py-2 text-left text-xs"
-                  >
-                    <span
-                      className={`inline-flex h-5 w-16 items-center justify-center rounded-full text-[10px] font-medium uppercase tracking-wide ${
-                        f.status === 'Done'
-                          ? 'bg-emerald-500/20 text-emerald-300'
-                          : 'bg-amber-500/20 text-amber-300'
-                      }`}
-                    >
-                      {f.status}
-                    </span>
-                    <span className="flex-1 text-slate-300">{f.name}</span>
-                    <span className="text-slate-500">{f.size}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-col gap-2 sm:items-end">
+              <a
+                href={DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
+              >
+                <DownloadIcon />
+                Download untuk Windows
+              </a>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-slate-500 hover:text-slate-300"
+              >
+                Lihat source code di GitHub →
+              </a>
             </div>
           </div>
         </div>
@@ -196,51 +187,6 @@ function Features(): React.JSX.Element {
   )
 }
 
-function HowItWorks(): React.JSX.Element {
-  const steps = [
-    {
-      number: '1',
-      title: 'Download & install',
-      description: 'Klik tombol download, jalankan installer. Selesai dalam 30 detik.'
-    },
-    {
-      number: '2',
-      title: 'Drop file HEIC',
-      description:
-        'Buka MyHeic, drag file dari File Explorer ke window-nya. Bisa banyak file sekaligus.'
-    },
-    {
-      number: '3',
-      title: 'Klik Convert',
-      description:
-        'File JPG akan tersimpan di folder yang sama (atau folder pilihan kamu). Langsung bisa dibuka di aplikasi apa saja.'
-    }
-  ]
-  return (
-    <section id="cara" className="border-t border-slate-800/60 bg-slate-950">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Cara pakainya
-          </h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {steps.map((step) => (
-            <div key={step.number} className="relative">
-              <div className="mb-4 grid h-10 w-10 place-items-center rounded-lg bg-indigo-600/20 text-base font-semibold text-indigo-300">
-                {step.number}
-              </div>
-              <h3 className="text-lg font-semibold text-white">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                {step.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 function Faq(): React.JSX.Element {
   const items = [
@@ -250,19 +196,23 @@ function Faq(): React.JSX.Element {
     },
     {
       q: 'Apakah foto saya di-upload ke server?',
-      a: 'Tidak. Konversi terjadi 100% di komputer kamu — foto tidak pernah dikirim keluar. Kamu bahkan bisa pakai MyHeic tanpa internet.'
+      a: 'Tidak. Konversi terjadi 100% di browser/komputer kamu — foto tidak pernah dikirim keluar. Versi web pakai WebAssembly libheif yang jalan langsung di browser. Versi desktop sepenuhnya offline.'
     },
     {
-      q: 'Kenapa Windows menampilkan peringatan saat install?',
-      a: 'Karena MyHeic belum ditandatangani digital (code signing certificate harganya jutaan/tahun, dan kami pilih tetap gratis). Windows memunculkan SmartScreen warning untuk software baru. Kamu cukup klik "More info" → "Run anyway" untuk lanjut.'
+      q: 'Mac/Linux/Chromebook bisa pakai?',
+      a: 'Versi web bisa dipakai di semua OS (Mac, Linux, Chromebook, bahkan HP) — cukup buka https://myheic.vercel.app di browser modern. Versi desktop saat ini Windows-only karena di sanalah masalah HEIC paling sering muncul.'
+    },
+    {
+      q: 'Kenapa Windows menampilkan peringatan saat install versi desktop?',
+      a: 'Karena MyHeic belum ditandatangani digital (code signing certificate harganya jutaan/tahun, dan kami pilih tetap gratis). Windows memunculkan SmartScreen warning untuk software baru. Klik "More info" → "Run anyway" untuk lanjut. Atau pakai versi web di atas — ga perlu install.'
+    },
+    {
+      q: 'Kapan harus pakai versi desktop?',
+      a: 'Pakai versi web untuk konversi cepat 1-10 file. Pakai versi desktop kalau kamu sering convert ratusan file, butuh batch save ke folder pilihan, atau kerja offline tanpa browser.'
     },
     {
       q: 'Apakah benar-benar gratis selamanya?',
       a: 'Ya. Tidak ada batas konversi, tidak ada watermark, tidak ada langganan. Kalau kamu terbantu, kamu bisa traktir kopi via tombol donasi — tapi sepenuhnya opsional.'
-    },
-    {
-      q: 'Versi Mac dan Linux kapan?',
-      a: 'Saat ini fokus di Windows karena di sanalah masalah HEIC paling sering muncul (Mac sudah native support HEIC). Versi Mac/Linux mungkin menyusul kalau ada permintaan.'
     }
   ]
   return (
