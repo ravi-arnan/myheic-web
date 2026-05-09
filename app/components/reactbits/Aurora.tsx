@@ -98,14 +98,16 @@ void main() {
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
   height = (uv.y * 2.0 - height + 0.2);
-  float intensity = 0.6 * height;
+  float intensity = clamp(0.6 * height, 0.0, 1.0);
 
   float midPoint = 0.20;
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
 
-  vec3 auroraColor = intensity * rampColor;
-
-  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
+  // Premultiplied output: keep color saturated, let alpha carry the
+  // intensity falloff. Multiplying RGB by `intensity` here would darken
+  // the color before compositing, leaving dirty grey halos on light
+  // surfaces. Pure-alpha falloff blends cleanly on any background.
+  fragColor = vec4(rampColor * auroraAlpha, auroraAlpha);
 }
 `
 
