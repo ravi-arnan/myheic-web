@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { attachExifToJpeg, buildExifBytesFromHeic } from '../lib/exif'
@@ -219,9 +220,13 @@ export default function Converter(): React.JSX.Element {
       <div className="overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between border-b border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] px-4 py-3">
           <div className="flex items-center gap-2">
-            <div className="grid h-7 w-7 place-items-center rounded-lg bg-[color:var(--color-brand)] text-xs font-bold text-white">
-              M
-            </div>
+            <Image
+              src="/myheic_logo.png"
+              alt=""
+              width={28}
+              height={28}
+              className="h-7 w-7"
+            />
             <span className="text-sm font-semibold text-[color:var(--color-ink)]">
               {t('cardTitle')}
             </span>

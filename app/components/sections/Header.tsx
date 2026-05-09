@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import LangToggle from '../LangToggle'
@@ -10,9 +11,14 @@ export default function Header(): React.JSX.Element {
     <header className="sticky top-0 z-20 border-b border-[color:var(--color-line)] bg-[color:var(--color-surface)]/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-[color:var(--color-brand)] text-base font-bold text-white">
-            M
-          </div>
+          <Image
+            src="/myheic_logo.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+            className="h-9 w-9"
+          />
           <span className="text-lg font-bold tracking-tight text-[color:var(--color-ink)]">
             MyHeic
           </span>
