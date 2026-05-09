@@ -216,7 +216,7 @@ export default function Converter(): React.JSX.Element {
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      <div className="overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+      <div className="overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between border-b border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="grid h-7 w-7 place-items-center rounded-lg bg-[color:var(--color-brand)] text-xs font-bold text-white">
@@ -297,7 +297,7 @@ export default function Converter(): React.JSX.Element {
                 {items.map((item) => (
                   <li
                     key={item.id}
-                    className="flex items-center gap-3 rounded-xl border border-[color:var(--color-line)] bg-white px-3 py-2.5 text-sm shadow-[0_1px_4px_rgba(16,24,40,0.04)]"
+                    className="flex items-center gap-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2.5 text-sm shadow-[var(--shadow-whisper)]"
                   >
                     <StatusBadge status={item.status} />
                     <div className="min-w-0 flex-1">
@@ -381,7 +381,7 @@ export default function Converter(): React.JSX.Element {
               <button
                 type="button"
                 onClick={handleDownloadAll}
-                className="rounded-xl border border-[color:var(--color-line)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--color-ink)] transition-colors hover:border-[color:var(--color-ink-soft)]"
+                className="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-2 text-sm font-semibold text-[color:var(--color-ink)] transition-colors hover:border-[color:var(--color-ink-soft)]"
               >
                 {t('downloadAll')}
               </button>
@@ -390,7 +390,7 @@ export default function Converter(): React.JSX.Element {
               type="button"
               onClick={handleConvertAll}
               disabled={!canConvert || isConverting}
-              className="rounded-xl bg-[color:var(--color-brand)] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(113,50,245,0.18)] transition-colors hover:bg-[color:var(--color-brand-dark)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+              className="rounded-xl bg-[color:var(--color-brand)] px-5 py-2 text-sm font-semibold text-white shadow-[var(--shadow-cta)] transition-colors hover:bg-[color:var(--color-brand-dark)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
             >
               {isConverting ? t('convertBusy') : t('convertIdle')}
             </button>
@@ -404,11 +404,11 @@ export default function Converter(): React.JSX.Element {
 function StatusBadge({ status }: { status: FileStatus }): React.JSX.Element {
   const t = useTranslations('converter.status')
   const map: Record<FileStatus, string> = {
-    pending:
-      'bg-[color:var(--color-line-soft)] text-[color:var(--color-ink-muted)]',
-    converting: 'bg-amber-100 text-amber-700',
+    pending: 'bg-[color:var(--color-line-soft)] text-[color:var(--color-ink-muted)]',
+    converting:
+      'bg-[color:var(--color-warning-bg)] text-[color:var(--color-warning-ink)]',
     done: 'bg-[color:var(--color-success-bg)] text-[color:var(--color-success-ink)]',
-    error: 'bg-rose-100 text-rose-700'
+    error: 'bg-[color:var(--color-danger-bg)] text-[color:var(--color-danger-ink)]'
   }
   return (
     <span

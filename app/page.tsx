@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import Converter from './components/Converter'
 import LangToggle from './components/LangToggle'
+import ThemeToggle from './components/ThemeToggle'
 
 const DOWNLOAD_URL =
   'https://github.com/ravi-arnan/myheic/releases/latest/download/MyHeic-Setup.exe'
@@ -10,7 +11,7 @@ const GITHUB_URL = 'https://github.com/ravi-arnan/myheic'
 
 export default function Home(): React.JSX.Element {
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-screen flex-col bg-[color:var(--color-surface)]">
       <Header />
       <Hero />
       <Features />
@@ -24,7 +25,7 @@ export default function Home(): React.JSX.Element {
 function Header(): React.JSX.Element {
   const t = useTranslations('header')
   return (
-    <header className="sticky top-0 z-20 border-b border-[color:var(--color-line)] bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-[color:var(--color-line)] bg-[color:var(--color-surface)]/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="grid h-9 w-9 place-items-center rounded-xl bg-[color:var(--color-brand)] text-base font-bold text-white">
@@ -45,13 +46,14 @@ function Header(): React.JSX.Element {
             {t('faq')}
           </a>
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           <LangToggle />
           <a
             href={DONATE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-xl border border-[color:var(--color-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[color:var(--color-ink)] shadow-[0_1px_4px_rgba(16,24,40,0.04)] transition-colors hover:border-[color:var(--color-ink-soft)] sm:inline-flex"
+            className="hidden rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-1.5 text-xs font-semibold text-[color:var(--color-ink)] shadow-[var(--shadow-whisper)] transition-colors hover:border-[color:var(--color-ink-soft)] sm:inline-flex"
           >
             {t('donate')}
           </a>
@@ -73,7 +75,7 @@ function Hero(): React.JSX.Element {
         }}
       />
       <div className="mx-auto flex max-w-5xl flex-col items-center px-6 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
-        <span className="mb-4 rounded-full border border-[color:var(--color-line)] bg-white px-3 py-1 text-xs font-medium text-[color:var(--color-ink-muted)] shadow-[0_1px_4px_rgba(16,24,40,0.04)]">
+        <span className="mb-4 rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-1 text-xs font-medium text-[color:var(--color-ink-muted)] shadow-[var(--shadow-whisper)]">
           {t('eyebrow')}
         </span>
         <h1 className="max-w-3xl text-balance text-3xl font-bold leading-[1.17] tracking-[-0.5px] text-[color:var(--color-ink)] sm:text-4xl md:text-5xl md:tracking-[-1px]">
@@ -113,7 +115,7 @@ function Features(): React.JSX.Element {
           {keys.map((key) => (
             <div
               key={key}
-              className="rounded-2xl border border-[color:var(--color-line)] bg-white p-6 shadow-[0_1px_4px_rgba(16,24,40,0.04)]"
+              className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-6 shadow-[var(--shadow-whisper)]"
             >
               <h3 className="text-lg font-semibold text-[color:var(--color-ink)]">
                 {t(`items.${key}.title`)}
@@ -132,7 +134,10 @@ function Features(): React.JSX.Element {
 function DesktopCta(): React.JSX.Element {
   const t = useTranslations('desktopCta')
   return (
-    <section id="desktop" className="border-t border-[color:var(--color-line)] bg-white">
+    <section
+      id="desktop"
+      className="border-t border-[color:var(--color-line)] bg-[color:var(--color-surface)]"
+    >
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
         <div className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface-soft)] p-6 sm:p-10">
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -152,7 +157,7 @@ function DesktopCta(): React.JSX.Element {
                 href={DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[color:var(--color-brand)] px-4 py-3 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(113,50,245,0.18)] transition-colors hover:bg-[color:var(--color-brand-dark)]"
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-[color:var(--color-brand)] px-4 py-3 text-sm font-semibold text-white shadow-[var(--shadow-cta)] transition-colors hover:bg-[color:var(--color-brand-dark)]"
               >
                 <DownloadIcon />
                 {t('downloadCta')}
@@ -196,7 +201,7 @@ function Faq(): React.JSX.Element {
           {items.map((item, idx) => (
             <details
               key={idx}
-              className="group rounded-2xl border border-[color:var(--color-line)] bg-white p-5 shadow-[0_1px_4px_rgba(16,24,40,0.04)] open:border-[color:var(--color-brand-subtle)]"
+              className="group rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-whisper)] open:border-[color:var(--color-brand-subtle)]"
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-[color:var(--color-ink)] sm:text-base">
                 <span>{item.q}</span>
@@ -218,7 +223,7 @@ function Faq(): React.JSX.Element {
 function Footer(): React.JSX.Element {
   const t = useTranslations('footer')
   return (
-    <footer className="mt-auto border-t border-[color:var(--color-line)] bg-white">
+    <footer className="mt-auto border-t border-[color:var(--color-line)] bg-[color:var(--color-surface)]">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-[color:var(--color-ink-soft)] sm:flex-row">
         <div>{t('copyright', { year: new Date().getFullYear() })}</div>
         <div className="flex items-center gap-5">

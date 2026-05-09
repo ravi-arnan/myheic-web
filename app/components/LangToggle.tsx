@@ -21,7 +21,7 @@ export default function LangToggle(): React.JSX.Element {
     <div
       role="group"
       aria-label="Language"
-      className="inline-flex items-center rounded-xl border border-[color:var(--color-line)] bg-white p-0.5"
+      className="inline-flex items-center rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-0.5"
     >
       {options.map((opt) => {
         const isActive = current === opt

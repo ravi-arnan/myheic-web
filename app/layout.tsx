@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Sans } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
+import ThemeProvider from './components/ThemeProvider'
 import './globals.css'
 
 const plex = IBM_Plex_Sans({
@@ -26,7 +27,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff'
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0e0e10' }
+  ]
 }
 
 export default async function RootLayout({
@@ -37,9 +41,15 @@ export default async function RootLayout({
   const locale = await getLocale()
   const messages = await getMessages()
   return (
-    <html lang={locale} className={`${plex.variable} h-full antialiased`}>
-      <body className="min-h-full bg-white text-[color:var(--color-ink)]">
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${plex.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-[color:var(--color-surface)] text-[color:var(--color-ink)]">
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
